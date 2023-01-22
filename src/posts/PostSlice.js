@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 //npm install axios
-import { axios } from 'axios';
+import axios from 'axios';
 //npm install date-fns --save
 import { sub } from 'date-fns';
 
@@ -30,11 +30,10 @@ const postsSlice = createSlice({
             reducer(state, action) {
                 state.posts.push(action.payload)
             },
-            prepare(title, content) {
+            prepare(content) {
                 return {
                     payload: {
                         id: nanoid(),
-                        title,
                         content,
                         date: new Date().toISOString(),
                         reactions: {
