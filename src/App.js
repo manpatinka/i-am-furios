@@ -1,10 +1,13 @@
 import AddPostForm from "./posts/AddPostForm";
+import PostsList from './posts/PostsList';
+
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <AddPostForm />
-    </div>
+      <PostsList />
+    </main>
   );
 }
 

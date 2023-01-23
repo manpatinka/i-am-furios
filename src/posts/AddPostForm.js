@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addNewPost } from "./PostSlice";
+import { addNewPost } from "./PostsSlice";
 
 const AddPostForm = () => {
     const dispatch = useDispatch();
@@ -50,6 +50,7 @@ const AddPostForm = () => {
               disabled={!canSave}
             >Let it go</button>
           </form>
+          <h3>Posts</h3>
         </section>
      );
 }

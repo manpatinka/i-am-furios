@@ -8,23 +8,24 @@ const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 const initialState = {
     posts: [],
-    status: 'idle',
+    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
     error: null
 }
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     const response = await axios.get(POSTS_URL)
     return response.data
-});
+})
 
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
     const response = await axios.post(POSTS_URL, initialPost)
     return response.data
-});
+})
+
 
 const postsSlice = createSlice({
     name: 'posts',
-    initialState: initialState,
+    initialState,
     reducers: {
         postAdded: {
             reducer(state, action) {
@@ -75,7 +76,7 @@ const postsSlice = createSlice({
                 }
 
                 return post;
-            })
+            });
 
             //add any fetched posts to the array
             state.posts = state.posts.concat(loadedPosts);
@@ -102,15 +103,16 @@ const postsSlice = createSlice({
                 shit: 0
             }
 
+            console.log(action.payload)
             state.posts.push(action.payload)
           })
     }
 })
 
-export const selectAllPosts = (state) => state.posts.posts;
-export const getPostsStatus = (state) => state.posts.status;
-export const getPostsError = (state) => state.posts.error;
+export const selectAllPosts = (state) => state.posts;
+export const getPostsStatus = (state) => state.status;
+export const getPostsError = (state) => state.error;
 
 export const { postAdded, reactionAdded } = postsSlice.actions;
 
-export default postsSlice;
+export default postsSlice.reducer;
